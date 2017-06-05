@@ -1,0 +1,10 @@
+image: node:7.9.0
+
+pipelines:
+  branches:
+    prod:
+      - step:
+          script:
+            - npm install --dev
+            - npm run build
+            - npm run deploy
