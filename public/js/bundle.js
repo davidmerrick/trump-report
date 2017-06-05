@@ -37366,7 +37366,7 @@ var App = (_dec = (0, _reactRedux.connect)(mapStateToProps), _dec(_class = funct
     }, {
         key: "getSubTitle",
         value: function getSubTitle() {
-            return "(Artificially) Intelligent Analysis";
+            return "(Artificially) Intelligent Analysis of Trump's Tweets";
         }
     }, {
         key: "render",
@@ -37389,26 +37389,26 @@ var App = (_dec = (0, _reactRedux.connect)(mapStateToProps), _dec(_class = funct
                 ),
                 _react2.default.createElement(
                     _reactBootstrap.Col,
-                    { lg: 8, xs: 12, md: 8 },
+                    { lg: 8, md: 8, sm: 8, xs: 12 },
                     _react2.default.createElement(
                         _reactBootstrap.Panel,
                         { header: "Twitter", bsStyle: "info" },
                         _react2.default.createElement(
                             _reactBootstrap.Col,
-                            { lg: 6, xs: 12, md: 6 },
+                            { lg: 6, md: 6, sm: 6, xs: 12 },
                             _react2.default.createElement(_LatestTweetWidget2.default, null),
                             _react2.default.createElement(_MoodWidget2.default, null)
                         ),
                         _react2.default.createElement(
                             _reactBootstrap.Col,
-                            { lg: 6, xs: 12, md: 6 },
+                            { lg: 6, md: 6, sm: 6, xs: 12 },
                             _react2.default.createElement(_BashingMediaWidget2.default, null)
                         )
                     )
                 ),
                 _react2.default.createElement(
                     _reactBootstrap.Col,
-                    { lg: 4, xs: 12, md: 12 },
+                    { lg: 4, md: 4, sm: 4, xs: 12 },
                     _react2.default.createElement(_DaysLeftWidget2.default, null),
                     _react2.default.createElement(_LatestNewsWidget2.default, null)
                 )
