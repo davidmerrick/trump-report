@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/davidmerrick/trump-report.svg?branch=master)](https://travis-ci.org/davidmerrick/trump-report)
+
 # Trump Report
 
 Hobby project I wrote to do some AI analysis of Trump tweets.
