@@ -6,6 +6,8 @@ Hobby project I wrote to do some AI analysis of Trump tweets.
 * Completely serverless architecture; hosted on S3 and uses AWS Lambda for API endpoints
 * Uses IBM Watson's Cognitive API for analysis
 
+![](img/screenshot.jpg)
+
 ## Current features
 
 * Countdown of days left in office
