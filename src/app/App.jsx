@@ -9,6 +9,7 @@ import LatestNewsWidget from "../components/LatestNewsWidget.jsx";
 import BashingMediaWidget from "../components/BashingMediaWidget.jsx";
 import {connect} from "react-redux";
 import ActionType from '../constants/ActionType'
+import ForkMeOnGitHub from '../components/ForkMeOnGitHub.jsx'
 
 // Import CSS
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
@@ -38,6 +39,7 @@ class App extends React.Component {
     render(){
         return(
             <div>
+                <ForkMeOnGitHub />
                 <PageHeader>&nbsp;&nbsp;<Image src="img/DJT.jpg" rounded height="40px" /> Trump Report&nbsp;&nbsp;<small>{this.getSubTitle()}</small></PageHeader>
                 <Col lg={8} xs={12} md={8}>
                     <Panel header="Twitter" bsStyle="info">
