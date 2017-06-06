@@ -2,9 +2,9 @@
 
 import React from "react";
 import {Panel} from "react-bootstrap";
+import Tweet from "./Tweet.jsx";
 import StoreState from "../constants/StoreState";
 import {connect} from "react-redux";
-import PoweredByLink from "./PoweredByLink.jsx";
 
 function mapStateToProps(state) {
     return {
@@ -16,7 +16,7 @@ function mapStateToProps(state) {
 
 @connect(mapStateToProps)
 
-class MoodWidget extends React.Component {
+class MoodCategoryTweetWidget extends React.Component {
 
     constructor(props) {
         super(props);
@@ -26,16 +26,29 @@ class MoodWidget extends React.Component {
         return (moodScore * 100).toFixed(2);
     }
 
-    getMoodObject(dataItem){
-        let tones = dataItem.mood.document_tone.tone_categories[0].tones;
-        let sorted = tones.sort((a,b) => b.score - a.score);
+    getDataItem(){
+        let {data, mood} = this.props;
+        let moodId = mood.toLowerCase();
+        let sorted = data.sort((a,b) => {
+            let aMoodObject = this.getMoodObject(a);
+            let bMoodObject = this.getMoodObject(b);
+            return bMoodObject.score - aMoodObject.score;
+        });
+
         return sorted[0];
     }
 
-    render(){
-        let title = "Mood";
+    getMoodObject(dataItem){
+        let {mood} = this.props;
+        let moodId = mood.toLowerCase();
+        let moodObject = dataItem.mood.document_tone.tone_categories[0].tones.find(item => item.tone_id === moodId);
+        return moodObject;
+    }
 
-        let {storeState, data} = this.props;
+    render(){
+        let {storeState, mood} = this.props;
+        let title = mood;
+
         let body;
 
         switch(storeState) {
@@ -44,14 +57,13 @@ class MoodWidget extends React.Component {
                 body = "Loading...";
                 break;
             case StoreState.READY:
-                let dataItem = data[0];
+                let dataItem = this.getDataItem();
                 let moodObject = this.getMoodObject(dataItem);
-                let mood = moodObject.tone_name;
-                let moodScore = moodObject.score;
                 body = <div>
-                            Primary mood of latest Tweet:
+                            {mood}: {this.getFormattedMoodScore(moodObject.score)}%
                             <br />
-                            <span style={{fontSize: "30px"}}>{mood}: {this.getFormattedMoodScore(moodScore)}%</span>
+                            <br />
+                            <Tweet tweet={dataItem.tweet} />
                         </div>;
                 break;
             default:
@@ -61,14 +73,13 @@ class MoodWidget extends React.Component {
         return (
             <Panel header={title} bsStyle="primary">
                 {body}
-                <br />
-                <PoweredByLink
-                    anchorText="IBM Watson"
-                    href="https://www.ibm.com/cloud-computing/bluemix/watson"
-                />
             </Panel>
         );
     }
 }
 
-export default MoodWidget
+MoodCategoryTweetWidget.defaultProps = {
+    mood: "Anger"
+}
+
+export default MoodCategoryTweetWidget

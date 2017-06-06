@@ -78,11 +78,6 @@ class BashingMediaWidget extends React.Component {
         return(
             <Panel header={panelInfoHeader} bsStyle="primary">
                 {body}
-                <br />
-                <PoweredByLink
-                    anchorText="IBM Watson"
-                    href="https://www.ibm.com/cloud-computing/bluemix/watson"
-                />
             </Panel>
         );
     }
