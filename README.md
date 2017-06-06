@@ -2,33 +2,17 @@
 
 # Trump Report
 
-Hobby project I wrote to do some AI analysis of Trump tweets.
+Hobby project I wrote to do some AI analysis of Trump tweets. Also an experiment in building a serverless web app.
 
 * Live demo at [https://tr.david-merrick.com/](https://tr.david-merrick.com/)
-* Completely serverless architecture; hosted on S3 and uses AWS Lambda for API endpoints
+* Completely serverless architecture; static assets are hosted on S3 and Lambda is used to fetch data
 * Uses IBM Watson's Cognitive API for analysis
 
 ![](img/screenshot.jpg)
 
-## Current features
+## Architecture
 
-* Countdown of days left in office
-* Latest Tweet
-* Last time he bashed the media on Twitter
-* Latest news
-* Mood in the last day (Perhaps using IBM Watson API to analyze Tweets)
-
-## Proposed features
-
-* Current odds of impeachment
-
-## API Endpoints
-
-Source code for API endpoints can be found here:
-* https://github.com/davidmerrick/lambda-tweet-classifier
-* https://github.com/davidmerrick/lambda-tone-analyzer
-* https://github.com/davidmerrick/lambda-get-tweets
-* https://github.com/davidmerrick/lambda-get-news
+On the backend, [this Lambda](https://github.com/davidmerrick/lambda-tweets-sns) runs on a 30-minute timer. It fetches Trump's most recent Tweets, filters out retweets, then pushes them to [SNS](https://aws.amazon.com/sns/). [This Lambda](https://github.com/davidmerrick/lambda-classify-tweets-s3) is then triggered by the SNS notification. It checks if there are any new Tweets, and, if there are, runs them through IBM Watson's Natural Language Classifier and Tone Analyzer APIs. It then stores the result in JSON in S3. A [third Lambda function](https://github.com/davidmerrick/lambda-get-news) is fronted by AWS API Gateway and is used to fetch the most recent Trump news for one of the widgets.
 
 ## Reference
 
