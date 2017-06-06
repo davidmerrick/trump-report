@@ -8,9 +8,9 @@ import {connect} from "react-redux";
 
 function mapStateToProps(state) {
     return {
-        storeState: state.TweetsReducer.storeState,
-        errorMessage: state.TweetsReducer.errorMessage,
-        tweets: state.TweetsReducer.tweets
+        storeState: state.DataReducer.storeState,
+        errorMessage: state.DataReducer.errorMessage,
+        data: state.DataReducer.data
     };
 }
 
@@ -24,7 +24,7 @@ class LatestTweet extends React.Component {
 
     render(){
         let title = "Latest Tweet";
-        let {tweets, storeState} = this.props;
+        let {data, storeState} = this.props;
         let body;
 
         switch(storeState){
@@ -33,10 +33,10 @@ class LatestTweet extends React.Component {
                 body = "Loading...";
                 break;
             case StoreState.READY:
-                if (!tweets || tweets.length === 0) {
+                if (!data || data.length === 0) {
                     body = "Sorry, no Tweets found.";
                 } else {
-                    let tweet = tweets[0];
+                    let tweet = data[0].tweet;
                     body = <Tweet tweet={tweet}/>
                 }
                 break;

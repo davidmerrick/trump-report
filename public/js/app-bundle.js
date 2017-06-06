@@ -12127,8 +12127,8 @@ var _keymirror2 = _interopRequireDefault(_keymirror);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ActionType = (0, _keymirror2.default)({
-    FETCH_TWEETS_FULFILLED: null,
-    FETCH_TWEETS_FAILED: null,
+    FETCH_DATA_FULFILLED: null,
+    FETCH_DATA_FAILED: null,
     CLASSIFIER_SUBMIT_FULFILLED: null,
     CLASSIFIER_SUBMIT_FAILED: null
 });
@@ -15759,7 +15759,7 @@ var Actions = function () {
             return async function (dispatch) {
                 var tweets = await _this.getTweets();
                 dispatch({
-                    type: _ActionType2.default.FETCH_TWEETS_FULFILLED,
+                    type: _ActionType2.default.FETCH_DATA_FULFILLED,
                     payload: {
                         tweets: tweets
                     }
@@ -36827,11 +36827,11 @@ var TweetsReducer = function TweetsReducer() {
     var newState = _extends({}, state);
     var actionType = action.type;
     switch (actionType) {
-        case _ActionType2.default.FETCH_TWEETS_FAILED:
+        case _ActionType2.default.FETCH_DATA_FAILED:
             newState.errorMessage = action.payload.errorMessage;
             newState.tweetsStoreState = _StoreState2.default.ERROR;
             break;
-        case _ActionType2.default.FETCH_TWEETS_FULFILLED:
+        case _ActionType2.default.FETCH_DATA_FULFILLED:
             newState.tweetsStoreState = _StoreState2.default.READY;
             newState.tweet = action.payload.tweet;
             break;

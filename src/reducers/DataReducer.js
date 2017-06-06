@@ -3,7 +3,7 @@ import ActionType from "../constants/ActionType";
 
 const initialState = {
     storeState: StoreState.EMPTY,
-    tweets: null,
+    data: null,
     error: null
 };
 
@@ -11,13 +11,13 @@ const TweetsReducer = (state = initialState, action) => {
     let newState = {...state};
     let actionType = action.type;
     switch(actionType) {
-        case ActionType.FETCH_TWEETS_FAILED:
+        case ActionType.FETCH_DATA_FAILED:
             newState.errorMessage = action.payload.errorMessage;
             newState.storeState = StoreState.ERROR;
             break;
-        case ActionType.FETCH_TWEETS_FULFILLED:
+        case ActionType.FETCH_DATA_FULFILLED:
             newState.storeState = StoreState.READY;
-            newState.tweets = action.payload.tweets;
+            newState.data = action.payload.data;
             break;
     }
     return newState;

@@ -29,7 +29,7 @@ class App extends React.Component {
 
     componentDidMount(){
         let {dispatch} = this.props;
-        dispatch({type: ActionType.FETCH_TWEETS_REQUESTED});
+        dispatch({type: ActionType.FETCH_DATA_REQUESTED});
     }
 
     getSubTitle(){

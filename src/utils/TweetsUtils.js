@@ -1,14 +1,10 @@
 import Endpoints from '../constants/Endpoints'
 
-class TweetsUtils {
+class DataUtils {
 
-    static fetchTweets(){
-        return fetch(Endpoints.TWEETS).then(response => response.json());
-    }
-
-    static filterOutRetweets(tweets){
-        return tweets.filter(tweet => !tweet.retweeted_status);
+    static fetchData(){
+        return fetch(Endpoints.DATA).then(response => response.json());
     }
 }
 
-export default TweetsUtils
+export default DataUtils

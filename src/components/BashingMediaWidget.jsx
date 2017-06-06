@@ -11,8 +11,9 @@ import ActionType from '../constants/ActionType'
 
 function mapStateToProps(state) {
     return {
-        storeState: state.BashingMediaReducer.storeState,
-        tweet: state.BashingMediaReducer.tweet
+        storeState: state.DataReducer.storeState,
+        errorMessage: state.DataReducer.errorMessage,
+        data: state.DataReducer.data
     };
 }
 
@@ -24,13 +25,23 @@ class BashingMediaWidget extends React.Component {
         super(props);
     }
 
-    componentDidMount(){
-        let {dispatch} = this.props;
-        dispatch({type: ActionType.FETCH_BASHING_MEDIA_TWEET_REQUESTED});
+    getBashingMediaTweet(){
+        let {data} = this.props;
+        let found = data.find(item => {
+            let categories = item.classification.categories;
+            let foundCategory = categories.find(item => item.label.indexOf("news") != -1);
+            let sentimentLabel = item.classification.sentiment.document.label;
+            return foundCategory && sentimentLabel === "negative";
+        });
+
+        if(found){
+            return found.tweet;
+        }
+        return null;
     }
 
     getBody(){
-        let {tweet} = this.props;
+        let tweet = this.getBashingMediaTweet();
         let body;
         if(!tweet){
             body = <div>

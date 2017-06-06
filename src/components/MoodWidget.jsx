@@ -10,11 +10,9 @@ import PoweredByLink from './PoweredByLink.jsx'
 
 function mapStateToProps(state) {
     return {
-        storeState: state.MoodReducer.storeState,
-        errorMessage: state.MoodReducer.errorMessage,
-        mood: state.MoodReducer.mood,
-        moodScore: state.MoodReducer.moodScore,
-        tweet: state.MoodReducer.tweet
+        storeState: state.DataReducer.storeState,
+        errorMessage: state.DataReducer.errorMessage,
+        data: state.DataReducer.data
     };
 }
 
@@ -26,8 +24,14 @@ class MoodWidget extends React.Component {
         super(props);
     }
 
-    getFormattedMoodScore(){
-        return (this.props.moodScore * 100).toFixed(2);
+    getFormattedMoodScore(moodScore){
+        return (moodScore * 100).toFixed(2);
+    }
+
+    getMoodObject(dataItem){
+        let tones = dataItem.mood.document_tone.tone_categories[0].tones;
+        let sorted = tones.sort((a,b) => b.score - a.score);
+        return sorted[0];
     }
 
     render(){
@@ -35,7 +39,7 @@ class MoodWidget extends React.Component {
         let tooltipText = "Trump's mood in the last Tweet he wrote (excludes retweets).";
         let panelInfoHeader = <PanelInfoHeader tooltipText={tooltipText} title={title} />
 
-        let {storeState, mood, tweet} = this.props;
+        let {storeState, data} = this.props;
         let body;
 
         switch(storeState) {
@@ -44,11 +48,15 @@ class MoodWidget extends React.Component {
                 body = "Loading...";
                 break;
             case StoreState.READY:
+                let dataItem = data[0];
+                let moodObject = this.getMoodObject(dataItem);
+                let mood = moodObject.tone_name;
+                let moodScore = moodObject.score;
                 body = <div>
-                            <span style={{fontSize: "30px"}}>{mood}: {this.getFormattedMoodScore()}%</span>
+                            <span style={{fontSize: "30px"}}>{mood}: {this.getFormattedMoodScore(moodScore)}%</span>
                             <br />
                             <br />
-                            <Tweet tweet={tweet} />
+                            <Tweet tweet={dataItem.tweet} />
                         </div>;
                 break;
             default:

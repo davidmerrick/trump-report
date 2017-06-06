@@ -1,7 +1,5 @@
-import BashingMediaReducer from "../reducers/BashingMediaReducer";
-import MoodReducer from "../reducers/MoodReducer";
 import NewsReducer from "../reducers/NewsReducer";
-import TweetsReducer from "../reducers/TweetsReducer";
+import DataReducer from "../reducers/DataReducer";
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import createSagaMiddleware from "redux-saga";
 import mySaga from "../sagas/Sagas";
@@ -10,9 +8,7 @@ import mySaga from "../sagas/Sagas";
 const sagaMiddleware = createSagaMiddleware();
 
 let reducers = combineReducers({
-    BashingMediaReducer,
-    TweetsReducer,
-    MoodReducer,
+    DataReducer,
     NewsReducer
 });
 const Store = createStore(reducers, applyMiddleware(sagaMiddleware));
