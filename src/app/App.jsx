@@ -56,10 +56,12 @@ class App extends React.Component {
                         <Col lg={6} md={6} sm={6} xs={12}>
                             <BashingMediaWidget />
                             <MoodCategoryTweetWidget mood="Disgust" />
+                            <MoodCategoryTweetWidget mood="Fear" />
                         </Col>
                         <Col lg={6} md={6} sm={6} xs={12}>
                             <MoodCategoryTweetWidget mood="Anger" />
                             <MoodCategoryTweetWidget mood="Sadness" />
+                            <MoodCategoryTweetWidget mood="Joy" />
                         </Col>
                         <br />
                         <PoweredByLink
