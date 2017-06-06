@@ -37332,11 +37332,10 @@ var App = (_dec = (0, _reactRedux.connect)(mapStateToProps), _dec(_class = funct
                     ),
                     _react2.default.createElement(
                         _reactBootstrap.Panel,
-                        { header: "Categorized Tweets", bsStyle: "info" },
+                        { header: "Categorized Tweets by Emotion", bsStyle: "info" },
                         _react2.default.createElement(
                             _reactBootstrap.Col,
                             { lg: 6, md: 6, sm: 6, xs: 12 },
-                            _react2.default.createElement(_BashingMediaWidget2.default, null),
                             _react2.default.createElement(_MoodCategoryTweetWidget2.default, { mood: "Disgust" }),
                             _react2.default.createElement(_MoodCategoryTweetWidget2.default, { mood: "Fear" })
                         ),
@@ -37346,17 +37345,21 @@ var App = (_dec = (0, _reactRedux.connect)(mapStateToProps), _dec(_class = funct
                             _react2.default.createElement(_MoodCategoryTweetWidget2.default, { mood: "Anger" }),
                             _react2.default.createElement(_MoodCategoryTweetWidget2.default, { mood: "Sadness" }),
                             _react2.default.createElement(_MoodCategoryTweetWidget2.default, { mood: "Joy" })
-                        ),
-                        _react2.default.createElement("br", null),
-                        _react2.default.createElement(_PoweredByLink2.default, {
-                            anchorText: "IBM Watson",
-                            href: "https://www.ibm.com/cloud-computing/bluemix/watson"
-                        })
+                        )
                     )
                 ),
                 _react2.default.createElement(
                     _reactBootstrap.Col,
                     { lg: 4, md: 4, sm: 4, xs: 12 },
+                    _react2.default.createElement(
+                        _reactBootstrap.Panel,
+                        { header: "Categorized Tweets by Action", bsStyle: "info" },
+                        _react2.default.createElement(
+                            _reactBootstrap.Col,
+                            { lg: 12, md: 12, sm: 12, xs: 12 },
+                            _react2.default.createElement(_BashingMediaWidget2.default, null)
+                        )
+                    ),
                     _react2.default.createElement(_DaysLeftWidget2.default, null),
                     _react2.default.createElement(_LatestNewsWidget2.default, null)
                 )
@@ -38452,7 +38455,7 @@ var BashingMediaWidget = (_dec = (0, _reactRedux.connect)(mapStateToProps), _dec
             };
 
             var tooltipText = "Uses artificial intelligence to analyze Trump's recent tweets " + "and find the first one that's likely to be negative about the media.";
-            var panelInfoHeader = _react2.default.createElement(_PanelInfoHeader2.default, { tooltipText: tooltipText, title: "Media-Bashing" });
+            var panelInfoHeader = _react2.default.createElement(_PanelInfoHeader2.default, { tooltipText: tooltipText, title: "Negative Tone about Media" });
 
             return _react2.default.createElement(
                 _reactBootstrap.Panel,

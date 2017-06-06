@@ -52,9 +52,8 @@ class App extends React.Component {
                             <MoodWidget />
                         </Col>
                     </Panel>
-                    <Panel header="Categorized Tweets" bsStyle="info">
+                    <Panel header="Categorized Tweets by Emotion" bsStyle="info">
                         <Col lg={6} md={6} sm={6} xs={12}>
-                            <BashingMediaWidget />
                             <MoodCategoryTweetWidget mood="Disgust" />
                             <MoodCategoryTweetWidget mood="Fear" />
                         </Col>
@@ -63,14 +62,14 @@ class App extends React.Component {
                             <MoodCategoryTweetWidget mood="Sadness" />
                             <MoodCategoryTweetWidget mood="Joy" />
                         </Col>
-                        <br />
-                        <PoweredByLink
-                            anchorText="IBM Watson"
-                            href="https://www.ibm.com/cloud-computing/bluemix/watson"
-                        />
                     </Panel>
                 </Col>
                 <Col lg={4} md={4} sm={4} xs={12}>
+                    <Panel header="Categorized Tweets by Action" bsStyle="info">
+                        <Col lg={12} md={12} sm={12} xs={12}>
+                            <BashingMediaWidget />
+                        </Col>
+                    </Panel>
                     <DaysLeftWidget />
                     <LatestNewsWidget />
                 </Col>

@@ -73,7 +73,7 @@ class BashingMediaWidget extends React.Component {
 
         let tooltipText = "Uses artificial intelligence to analyze Trump's recent tweets " +
                 "and find the first one that's likely to be negative about the media.";
-        let panelInfoHeader = <PanelInfoHeader tooltipText={tooltipText} title="Media-Bashing" />
+        let panelInfoHeader = <PanelInfoHeader tooltipText={tooltipText} title="Negative Tone about Media" />
 
         return(
             <Panel header={panelInfoHeader} bsStyle="primary">
