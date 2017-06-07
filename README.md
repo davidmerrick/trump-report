@@ -14,7 +14,7 @@ Hobby project I wrote to do some AI analysis of Trump tweets. Also an experiment
 
 ### Frontend
 
-The frontend is primarily built with React, Redux, Redux-Saga, and React-Bootstrap, in ES2015 syntax. WebPack and Babel are used for transpiling.
+The frontend is primarily built with React, Redux, Redux-Saga, and React-Bootstrap, in ES2015 syntax. WebPack and Babel are used for transpiling. Static assets are hosted on S3 and then fronted by the [CloudFlare](https://www.cloudflare.com/) CDN.
 
 ### Backend
 
