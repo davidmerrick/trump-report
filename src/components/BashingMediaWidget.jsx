@@ -6,8 +6,6 @@ import StoreState from "../constants/StoreState";
 import Tweet from "./Tweet.jsx";
 import {connect} from "react-redux";
 import PanelInfoHeader from "./PanelInfoHeader.jsx";
-import PoweredByLink from './PoweredByLink.jsx'
-import ActionType from '../constants/ActionType'
 
 function mapStateToProps(state) {
     return {

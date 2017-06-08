@@ -7,11 +7,11 @@ import LatestTweetWidget from "../components/LatestTweetWidget.jsx";
 import MoodWidget from "../components/MoodWidget.jsx";
 import LatestNewsWidget from "../components/LatestNewsWidget.jsx";
 import BashingMediaWidget from "../components/BashingMediaWidget.jsx";
+import BraggingWidget from "../components/BraggingWidget.jsx";
 import MoodCategoryTweetWidget from "../components/MoodCategoryTweetWidget.jsx";
 import {connect} from "react-redux";
 import ActionType from '../constants/ActionType'
 import ForkMeOnGitHub from '../components/ForkMeOnGitHub.jsx'
-import PoweredByLink from '../components/PoweredByLink.jsx'
 
 // Import CSS
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
@@ -68,6 +68,7 @@ class App extends React.Component {
                     <Panel header="Categorized Tweets by Action" bsStyle="info">
                         <Col lg={12} md={12} sm={12} xs={12}>
                             <BashingMediaWidget />
+                            <BraggingWidget />
                         </Col>
                     </Panel>
                     <DaysLeftWidget />
