@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/davidmerrick/trump-report.svg?branch=master)](https://travis-ci.org/davidmerrick/trump-report)
+[![Online Status](https://tr.david-merrick.com)](https://img.shields.io/badge/status-online-brightgreen.svg)
 
 # Trump Report
 
