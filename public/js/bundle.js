@@ -38769,7 +38769,7 @@ var DaysLeft = function (_React$Component) {
             return _react2.default.createElement(
                 _reactBootstrap.Panel,
                 { header: title, bsStyle: "primary" },
-                daysLeft
+                daysLeft.toLocaleString()
             );
         }
     }]);

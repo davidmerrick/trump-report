@@ -17,7 +17,7 @@ class DaysLeft extends React.Component {
         let title = "Days Left In Office";
         return(
             <Panel header={title} bsStyle="primary">
-                {daysLeft}
+                {daysLeft.toLocaleString()}
             </Panel>
         );
     }
