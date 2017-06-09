@@ -38606,52 +38606,53 @@ var BraggingWidget = (_dec = (0, _reactRedux.connect)(mapStateToProps), _dec(_cl
     }
 
     _createClass(BraggingWidget, [{
+        key: "getMaxConfidenceScore",
+        value: function getMaxConfidenceScore(moodItem) {
+            var maxConfidenceScore = 0;
+            if (moodItem.sentences_tone) {
+                moodItem.sentences_tone.forEach(function (sentence) {
+                    var languageTones = sentence.tone_categories.find(function (category) {
+                        return category.category_id === "language_tone";
+                    }).tones;
+                    var confidenceScore = languageTones.find(function (item) {
+                        return item.tone_id = "confident";
+                    }).score;
+                    if (confidenceScore > maxConfidenceScore) {
+                        maxConfidenceScore = confidenceScore;
+                    };
+                });
+            } else {
+                var languageTones = moodItem.document_tone.tone_categories.find(function (category) {
+                    return category.category_id === "language_tone";
+                }).tones;
+                maxConfidenceScore = languageTones.find(function (item) {
+                    return item.tone_id = "confident";
+                }).score;
+            }
+            return maxConfidenceScore;
+        }
+    }, {
+        key: "getMaxSentimentScore",
+        value: function getMaxSentimentScore(classificationItem) {
+            // Todo: this could be made much more accurate if I could get results for each sentence.
+            return classificationItem.sentiment.document.score;
+        }
+    }, {
         key: "getBraggingTweet",
         value: function getBraggingTweet() {
+            var _this2 = this;
+
             var data = this.props.data;
 
             var found = data.find(function (item) {
-                var threshold = .9;
+                var CONFIDENCE_THRESHOLD = .9;
                 var mood = item.mood;
-                var maxConfidenceScore = 0;
-                var maxExtraversionScore = 0;
-                if (mood.sentences_tone) {
-                    mood.sentences_tone.forEach(function (sentence) {
-                        var languageTones = sentence.tone_categories.find(function (category) {
-                            return category.category_id === "language_tone";
-                        }).tones;
-                        var confidenceScore = languageTones.find(function (item) {
-                            return item.tone_id = "confident";
-                        }).score;
-                        if (confidenceScore > maxConfidenceScore) {
-                            maxConfidenceScore = confidenceScore;
-                        };
-                        var socialTones = sentence.tone_categories.find(function (category) {
-                            return category.category_id === "social_tone";
-                        }).tones;
-                        var extraversionScore = socialTones.find(function (item) {
-                            return item.tone_id = "extraversion_big5";
-                        }).score;
-                        if (extraversionScore > maxExtraversionScore) {
-                            maxExtraversionScore = extraversionScore;
-                        };
-                    });
-                } else {
-                    var languageTones = item.mood.document_tone.tone_categories.find(function (category) {
-                        return category.category_id === "language_tone";
-                    }).tones;
-                    maxConfidenceScore = languageTones.find(function (item) {
-                        return item.tone_id = "confident";
-                    }).score;
-                    var socialTones = item.mood.document_tone.tone_categories.find(function (category) {
-                        return category.category_id === "social_tone";
-                    }).tones;
-                    maxExtraversionScore = socialTones.find(function (item) {
-                        return item.tone_id = "extraversion_big5";
-                    }).score;
-                }
+                var maxConfidenceScore = _this2.getMaxConfidenceScore(mood);
+                var classification = item.classification;
+                var maxSentimentScore = _this2.getMaxSentimentScore(classification);
 
-                return maxConfidenceScore > threshold && maxExtraversionScore > threshold;
+                // Bragging tweets are likely to be confident and on the positive side of the sentiment spectrum
+                return maxConfidenceScore > CONFIDENCE_THRESHOLD && maxSentimentScore > 0;
             });
 
             if (found) {

@@ -23,34 +23,39 @@ class BraggingWidget extends React.Component {
         super(props);
     }
 
+    getMaxConfidenceScore(moodItem){
+        let maxConfidenceScore = 0;
+        if(moodItem.sentences_tone){
+            moodItem.sentences_tone.forEach(sentence => {
+                let languageTones = sentence.tone_categories.find(category => category.category_id === "language_tone").tones;
+                let confidenceScore = languageTones.find(item => item.tone_id="confident").score;
+                if(confidenceScore > maxConfidenceScore){
+                    maxConfidenceScore = confidenceScore;
+                };
+            });
+        } else {
+            let languageTones = moodItem.document_tone.tone_categories.find(category => category.category_id === "language_tone").tones;
+            maxConfidenceScore = languageTones.find(item => item.tone_id="confident").score;
+        }
+        return maxConfidenceScore;
+    }
+
+    getMaxSentimentScore(classificationItem){
+        // Todo: this could be made much more accurate if I could get results for each sentence.
+        return classificationItem.sentiment.document.score;
+    }
+
     getBraggingTweet(){
         let {data} = this.props;
         let found = data.find(item => {
-            let threshold = .9;
+            const CONFIDENCE_THRESHOLD = .9;
             let mood = item.mood;
-            let maxConfidenceScore = 0;
-            let maxExtraversionScore = 0;
-            if(mood.sentences_tone){
-                mood.sentences_tone.forEach(sentence => {
-                    let languageTones = sentence.tone_categories.find(category => category.category_id === "language_tone").tones;
-                    let confidenceScore = languageTones.find(item => item.tone_id="confident").score;
-                    if(confidenceScore > maxConfidenceScore){
-                        maxConfidenceScore = confidenceScore;
-                    };
-                    let socialTones = sentence.tone_categories.find(category => category.category_id === "social_tone").tones;
-                    let extraversionScore = socialTones.find(item => item.tone_id="extraversion_big5").score;
-                    if(extraversionScore > maxExtraversionScore){
-                        maxExtraversionScore = extraversionScore;
-                    };
-                });
-            } else {
-                let languageTones = item.mood.document_tone.tone_categories.find(category => category.category_id === "language_tone").tones;
-                maxConfidenceScore = languageTones.find(item => item.tone_id="confident").score;
-                let socialTones = item.mood.document_tone.tone_categories.find(category => category.category_id === "social_tone").tones;
-                maxExtraversionScore = socialTones.find(item => item.tone_id="extraversion_big5").score;
-            }
+            let maxConfidenceScore = this.getMaxConfidenceScore(mood);
+            let classification = item.classification;
+            let maxSentimentScore = this.getMaxSentimentScore(classification);
 
-            return maxConfidenceScore > threshold && maxExtraversionScore > threshold;
+            // Bragging tweets are likely to be confident and on the positive side of the sentiment spectrum
+            return maxConfidenceScore > CONFIDENCE_THRESHOLD && maxSentimentScore > 0;
         });
 
         if(found){
