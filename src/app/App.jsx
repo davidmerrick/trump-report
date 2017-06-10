@@ -68,7 +68,6 @@ class App extends React.Component {
                     <Panel header="Categorized Tweets by Action" bsStyle="info">
                         <Col lg={12} md={12} sm={12} xs={12}>
                             <BashingMediaWidget />
-                            <BraggingWidget />
                         </Col>
                     </Panel>
                     <DaysLeftWidget />

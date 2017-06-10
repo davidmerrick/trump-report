@@ -10400,10 +10400,17 @@ var Tweet = function (_React$Component) {
     }
 
     _createClass(Tweet, [{
+        key: 'getDecodedTweetText',
+        value: function getDecodedTweetText(tweet) {
+            var parser = new DOMParser();
+            var decodedText = parser.parseFromString(tweet.text, "text/html").body.textContent;
+            return decodedText;
+        }
+    }, {
         key: 'render',
         value: function render() {
             var tweet = this.props.tweet;
-            var tweetText = tweet.text;
+            var tweetText = this.getDecodedTweetText(tweet);
             var tweetDate = (0, _moment2.default)(tweet.created_at).fromNow();
             var tweetUrl = 'https://twitter.com/realDonaldTrump/status/' + tweet.id_str;
             return _react2.default.createElement(
@@ -37432,8 +37439,7 @@ var App = (_dec = (0, _reactRedux.connect)(mapStateToProps), _dec(_class = funct
                         _react2.default.createElement(
                             _reactBootstrap.Col,
                             { lg: 12, md: 12, sm: 12, xs: 12 },
-                            _react2.default.createElement(_BashingMediaWidget2.default, null),
-                            _react2.default.createElement(_BraggingWidget2.default, null)
+                            _react2.default.createElement(_BashingMediaWidget2.default, null)
                         )
                     ),
                     _react2.default.createElement(_DaysLeftWidget2.default, null),

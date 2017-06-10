@@ -9,9 +9,15 @@ class Tweet extends React.Component {
         super(props);
     }
 
+    getDecodedTweetText(tweet){
+        let parser = new DOMParser();
+        let decodedText = parser.parseFromString(tweet.text, "text/html").body.textContent;
+        return decodedText;
+    }
+
     render(){
         let tweet = this.props.tweet;
-        let tweetText = tweet.text;
+        let tweetText = this.getDecodedTweetText(tweet);
         let tweetDate = moment(tweet.created_at).fromNow();
         let tweetUrl = `https://twitter.com/realDonaldTrump/status/${tweet.id_str}`;
         return(
