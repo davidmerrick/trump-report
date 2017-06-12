@@ -37439,7 +37439,8 @@ var App = (_dec = (0, _reactRedux.connect)(mapStateToProps), _dec(_class = funct
                         _react2.default.createElement(
                             _reactBootstrap.Col,
                             { lg: 12, md: 12, sm: 12, xs: 12 },
-                            _react2.default.createElement(_BashingMediaWidget2.default, null)
+                            _react2.default.createElement(_BashingMediaWidget2.default, null),
+                            _react2.default.createElement(_BraggingWidget2.default, null)
                         )
                     ),
                     _react2.default.createElement(_DaysLeftWidget2.default, null),
@@ -38617,6 +38618,9 @@ var BraggingWidget = (_dec = (0, _reactRedux.connect)(mapStateToProps), _dec(_cl
             var maxConfidenceScore = 0;
             if (moodItem.sentences_tone) {
                 moodItem.sentences_tone.forEach(function (sentence) {
+                    if (sentence.tone_categories.length === 0) {
+                        return;
+                    }
                     var languageTones = sentence.tone_categories.find(function (category) {
                         return category.category_id === "language_tone";
                     }).tones;

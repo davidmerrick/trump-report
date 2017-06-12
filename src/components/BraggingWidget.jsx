@@ -27,6 +27,9 @@ class BraggingWidget extends React.Component {
         let maxConfidenceScore = 0;
         if(moodItem.sentences_tone){
             moodItem.sentences_tone.forEach(sentence => {
+                if(sentence.tone_categories.length === 0){
+                    return;
+                }
                 let languageTones = sentence.tone_categories.find(category => category.category_id === "language_tone").tones;
                 let confidenceScore = languageTones.find(item => item.tone_id="confident").score;
                 if(confidenceScore > maxConfidenceScore){
