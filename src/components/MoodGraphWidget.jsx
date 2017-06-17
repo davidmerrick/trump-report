@@ -41,6 +41,17 @@ class MoodGraphWidget extends React.Component {
         }
     }
 
+    getGraphJsx(score, tone_name, tone_id){
+        let bsStyle = this.mapColorToMood(tone_id);
+        let scorePercent = score * 100;
+        let label = scorePercent.toFixed(0) + "%";
+        const MIN_SCORE_LABEL_THRESHOLD = 5;
+        if(scorePercent < MIN_SCORE_LABEL_THRESHOLD){
+            return <div>{tone_name}: <ProgressBar now={scorePercent} bsStyle={bsStyle} /></div>;
+        }
+        return <div>{tone_name}: <ProgressBar now={scorePercent} label={label} bsStyle={bsStyle} /></div>;
+    }
+
     render(){
         let title = "Mood Graph";
 
@@ -58,9 +69,7 @@ class MoodGraphWidget extends React.Component {
                 let graphs = [];
                 tones.forEach(toneObject => {
                     let {score, tone_name, tone_id} = toneObject;
-                    let bsStyle = this.mapColorToMood(tone_id);
-                    let scorePercent = score * 100;
-                    let graph = <div>{tone_name}: <ProgressBar now={scorePercent} label={scorePercent} bsStyle={bsStyle} /></div>;
+                    let graph = this.getGraphJsx(score, tone_name, tone_id);
                     graphs.push(graph);
                 });
                 body = <div>

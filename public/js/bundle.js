@@ -39310,6 +39310,30 @@ var MoodGraphWidget = (_dec = (0, _reactRedux.connect)(mapStateToProps), _dec(_c
             }
         }
     }, {
+        key: "getGraphJsx",
+        value: function getGraphJsx(score, tone_name, tone_id) {
+            var bsStyle = this.mapColorToMood(tone_id);
+            var scorePercent = score * 100;
+            var label = scorePercent.toFixed(0) + "%";
+            var MIN_SCORE_LABEL_THRESHOLD = 5;
+            if (scorePercent < MIN_SCORE_LABEL_THRESHOLD) {
+                return _react2.default.createElement(
+                    "div",
+                    null,
+                    tone_name,
+                    ": ",
+                    _react2.default.createElement(_reactBootstrap.ProgressBar, { now: scorePercent, bsStyle: bsStyle })
+                );
+            }
+            return _react2.default.createElement(
+                "div",
+                null,
+                tone_name,
+                ": ",
+                _react2.default.createElement(_reactBootstrap.ProgressBar, { now: scorePercent, label: label, bsStyle: bsStyle })
+            );
+        }
+    }, {
         key: "render",
         value: function render() {
             var _this2 = this;
@@ -39336,15 +39360,7 @@ var MoodGraphWidget = (_dec = (0, _reactRedux.connect)(mapStateToProps), _dec(_c
                             tone_name = toneObject.tone_name,
                             tone_id = toneObject.tone_id;
 
-                        var bsStyle = _this2.mapColorToMood(tone_id);
-                        var scorePercent = score * 100;
-                        var graph = _react2.default.createElement(
-                            "div",
-                            null,
-                            tone_name,
-                            ": ",
-                            _react2.default.createElement(_reactBootstrap.ProgressBar, { now: scorePercent, label: scorePercent, bsStyle: bsStyle })
-                        );
+                        var graph = _this2.getGraphJsx(score, tone_name, tone_id);
                         graphs.push(graph);
                     });
                     body = _react2.default.createElement(
