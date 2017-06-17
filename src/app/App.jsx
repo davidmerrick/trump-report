@@ -12,6 +12,7 @@ import MoodCategoryTweetWidget from "../components/MoodCategoryTweetWidget.jsx";
 import {connect} from "react-redux";
 import ActionType from '../constants/ActionType'
 import ForkMeOnGitHub from '../components/ForkMeOnGitHub.jsx'
+import MoodGraphWidget from '../components/MoodGraphWidget.jsx'
 
 // Import CSS
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
@@ -50,6 +51,9 @@ class App extends React.Component {
                         </Col>
                         <Col lg={6} md={6} sm={6} xs={12}>
                             <MoodWidget />
+                        </Col>
+                        <Col lg={12} md={12} sm={12} xs={12}>
+                            <MoodGraphWidget />
                         </Col>
                     </Panel>
                     <Panel header="Categorized Tweets by Emotion" bsStyle="info">
