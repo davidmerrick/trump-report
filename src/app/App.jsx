@@ -64,6 +64,10 @@ class App extends React.Component {
                         <Col lg={6} md={6} sm={6} xs={12}>
                             <MoodCategoryTweetWidget mood="Anger" />
                             <MoodCategoryTweetWidget mood="Sadness" />
+                        </Col>
+                        <Col lg={3} md={3} sm={3} xs={0}>
+                        </Col>
+                        <Col lg={6} md={6} sm={6} xs={12}>
                             <MoodCategoryTweetWidget mood="Joy" />
                         </Col>
                     </Panel>

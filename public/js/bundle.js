@@ -37434,7 +37434,12 @@ var App = (_dec = (0, _reactRedux.connect)(mapStateToProps), _dec(_class = funct
                             _reactBootstrap.Col,
                             { lg: 6, md: 6, sm: 6, xs: 12 },
                             _react2.default.createElement(_MoodCategoryTweetWidget2.default, { mood: "Anger" }),
-                            _react2.default.createElement(_MoodCategoryTweetWidget2.default, { mood: "Sadness" }),
+                            _react2.default.createElement(_MoodCategoryTweetWidget2.default, { mood: "Sadness" })
+                        ),
+                        _react2.default.createElement(_reactBootstrap.Col, { lg: 3, md: 3, sm: 3, xs: 0 }),
+                        _react2.default.createElement(
+                            _reactBootstrap.Col,
+                            { lg: 6, md: 6, sm: 6, xs: 12 },
                             _react2.default.createElement(_MoodCategoryTweetWidget2.default, { mood: "Joy" })
                         )
                     )
